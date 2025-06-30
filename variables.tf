@@ -6,7 +6,7 @@ variable "repository_name" {
 variable "template_organization" {
   description = "GitHub organization containing the template repository"
   type        = string
-  default     = "SCT-Engineering"
+  default     = "HappyPathway"
 }
 
 variable "template_repository" {
@@ -40,5 +40,25 @@ variable "enforce_prs" {
 variable "github_org" {
   description = "GitHub organization where repository will be created"
   type        = string
-  default     = "SCT-Engineering"
+  default     = "HappyPathway"
+}
+
+variable files_branch {
+  description = "Branch to manage files on"
+  type        = string
+  default     = "repo-init"
+}
+
+variable pr {
+  description = "Pull request configuration"
+  type = object({
+    create = bool
+    title  = string
+    body   = string
+  })
+  default = {
+    create = true
+    title  = "Initial commit"
+    body   = "This PR initializes the repository with the template configuration."
+  }
 }

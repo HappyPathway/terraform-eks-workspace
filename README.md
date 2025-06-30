@@ -45,7 +45,7 @@ module "eks_workspace" {
 |------|-------------|------|---------|:--------:|
 | repository_name | Name of the repository to create | string | - | yes |
 | repository_description | Description of the repository | string | null | no |
-| template_repo_org | Organization containing the template repository | string | "SCT-Engineering" | no |
+| template_repo_org | Organization containing the template repository | string | "HappyPathway" | no |
 | template_repo_name | Name of the template repository | string | "template-eks-cluster" | no |
 | cluster_config | Configuration for the EKS cluster | map(any) | {} | yes |
 
@@ -62,7 +62,7 @@ module "eks_workspace" {
 The module implements the following workflow:
 
 1. Creates a new repository using the terraform-github-repo module
-2. Uses the specified template repository (default: SCT-Engineering/template-eks-cluster)
+2. Uses the specified template repository (default: HappyPathway/template-eks-cluster)
 3. Injects the cluster configuration as a config.json file using managed_extra_files
 4. Sets up repository settings, branch protection, and access controls
 5. Configures CODEOWNERS and other repository files

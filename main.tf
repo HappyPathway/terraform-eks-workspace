@@ -1,11 +1,3 @@
-terraform {
-  required_providers {
-    github = {
-      source  = "integrations/github"
-      version = "~> 5.0"
-    }
-  }
-}
 
 locals {
   # Convert repository config to JSON for config.json
@@ -22,6 +14,8 @@ module "repository" {
   template_repo     = var.template_repository
   template_repo_org = var.template_organization
 
+  github_default_branch = "repo-init"
+  files_branch          = var.files_branch
   # Repository settings
   enforce_prs            = var.enforce_prs
   github_auto_init       = false # Not needed since we're using a template
@@ -43,4 +37,17 @@ module "repository" {
       content = local.config_json
     }
   ]
+}
+
+locals {
+  created_repo = module.repository.github_repo
+}
+
+resource "github_repository_pull_request" "pr" {
+  count           = var.pr.create ? 1 : 0
+  base_repository = local.created_repo.name
+  base_ref        = "main"
+  head_ref        = var.files_branch
+  title           = var.pr.title
+  body            = var.pr.body
 }
