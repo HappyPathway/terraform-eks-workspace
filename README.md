@@ -14,7 +14,7 @@ This module creates and configures a new GitHub repository for EKS cluster confi
 
 ```hcl
 module "eks_workspace" {
-  source = "git::https://github.com/SCT-Engineering/terraform-eks-workspace.git"
+  source = "HappyPathway/repo/github"
 
   repository_name        = "my-eks-cluster"
   repository_description = "EKS Cluster configuration for my-eks-cluster"
